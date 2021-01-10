@@ -12,7 +12,11 @@ Sensor::Sensor(long threshold) {
 uint8_t Sensor::triggered() {
   long d = this->_ultrasonicDetectDistance();
 
-  if((d < this->_ultrasonicDistanceThreshold) || (this->_infraredTriggered())) {
+  if((d < this->_ultrasonicDistanceThreshold) 
+    #ifndef SHEILD_BOT 
+      || (this->_infraredTriggered()
+    #endif
+   )) {
     return 1;
   }
   else {

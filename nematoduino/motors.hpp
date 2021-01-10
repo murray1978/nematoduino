@@ -16,6 +16,12 @@
 #define SPDBOOST 0
 #define TURN_TIME 0
 
+#ifdef SHEILD_BOT
+#include <Shieldbot.h>
+
+
+#endif
+
 class Motors {
   public:
     Motors();
@@ -30,6 +36,9 @@ class Motors {
     void _rightForward(uint8_t);
     void _rightBackward(uint8_t);
     void _rightOff();
+#ifdef SHEILD_BOT
+    Shieldbot shieldbot;// = Shieldbot();
+#endif
 };
 
 #endif

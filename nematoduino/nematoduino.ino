@@ -1,3 +1,4 @@
+
 //
 // Settings
 //
@@ -14,6 +15,7 @@
 //
 // Robot code
 //
+#define SHEILD_BOT 1      //using the seeed studio sheild bot
 
 #include <avr/pgmspace.h>
 

@@ -1,6 +1,10 @@
 #include "motors.hpp"
 
 Motors::Motors() {
+#ifdef SHEILD_BOT
+  shieldbot = Shieldbot();
+  shieldbot.setMaxSpeed(255);//255 is max
+#else
   pinMode(LSPD_PIN, OUTPUT);
   pinMode(RSPD_PIN, OUTPUT);
 
@@ -9,6 +13,7 @@ Motors::Motors() {
 
   pinMode(RFWD_PIN, OUTPUT);
   pinMode(RBCK_PIN, OUTPUT);
+#endif
 }
 
 void Motors::_leftForward(uint8_t spd) {
@@ -54,9 +59,14 @@ void Motors::_rightOff() {
 }
 
 void Motors::run(int16_t inputLeftSpd, int16_t inputRightSpd) {
+
   int8_t leftSign = inputLeftSpd / abs(inputLeftSpd);
   int8_t rightSign = inputRightSpd / abs(inputRightSpd);
 
+#ifdef SHEILD_BOT
+  shieldbot.drive(inputLeftSpd, inputRightSpd);
+  
+#else
   uint8_t outputLeftSpd = min( abs(inputLeftSpd)+SPDBOOST, 255);
   uint8_t outputRightSpd = min( abs(inputRightSpd)+SPDBOOST, 255);
 
@@ -74,6 +84,7 @@ void Motors::run(int16_t inputLeftSpd, int16_t inputRightSpd) {
     this->_rightBackward(outputRightSpd);
   }
 
+#endif
   if((leftSign*rightSign) < 0) {
     delay(TURN_TIME);
   }
