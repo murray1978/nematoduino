@@ -25,6 +25,7 @@ class Sensor {
 
     long _ultrasonicDetectDistance();
     long _ultrasonicDistanceThreshold;
+    
 };
 
 #endif

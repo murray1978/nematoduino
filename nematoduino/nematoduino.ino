@@ -40,6 +40,8 @@ void loop() {
     worm.chemotaxis();
   }
 
+  //At some point I want it to react to the IR ine sensors similar to touch
+
   int16_t leftMuscle = worm.getLeftMuscle();
   int16_t rightMuscle = worm.getRightMuscle();
 

@@ -13,9 +13,7 @@ uint8_t Sensor::triggered() {
   long d = this->_ultrasonicDetectDistance();
 
   if((d < this->_ultrasonicDistanceThreshold) 
-    #ifndef SHEILD_BOT 
       || (this->_infraredTriggered()
-    #endif
    )) {
     return 1;
   }
@@ -42,6 +40,7 @@ void Sensor::_infraredI2CWrite(uint8_t data) {
 }
 
 uint8_t Sensor::_infraredTriggered() {
+
   uint8_t data = 0xC0 | this->_infraredI2CRead();
   this->_infraredI2CWrite(data);
 
